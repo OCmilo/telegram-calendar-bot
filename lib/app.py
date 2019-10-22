@@ -17,7 +17,11 @@ if not TelegramBot.init_webhook(webhook):
 
 @app.route('/webhook', methods=['POST'])
 def index():
-
+    res = request.get_json()
+    robot = TelegramBot()
+    robot.parseData(res)
+    isSuccessful = robot.conditionalResponse()
+    return jsonify(success=isSuccessful)
 
 
 
