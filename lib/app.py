@@ -1,4 +1,5 @@
-import subprocess, shlex
+import subprocess
+import shlex
 from flask import Flask, request, jsonify
 
 
@@ -24,8 +25,15 @@ def index():
     return jsonify(success=isSuccessful)
 
 
+def webhookProccess(hostname):
+    shCommand = 'ssh -o ServerAliveInterval=60 -R {}:80:localhost:8888 serveo.net'.format(hostname)
+    args = shlex.split(shCommand)
+    subprocess.Popen(args)
+
+
 
 if __name__ == '__main__':
+    webhookProccess(hostname)
     app.run(port=5000)
 
 

@@ -1,12 +1,18 @@
-import requests, re
+import requests
+import re
 
+from calendarIntegration import authentication
 from config import TELEGRAM_SEND_MESSAGE_URL
 
-class TelegramBot:
+
+class TelegramBot: 
     def __init__(self):
+        #initializing fields for parsing
         self.chat_id = None
         self.text = None
         self.first_name = None
+        #creating Google Calendar API Service
+        self.service = authentication()
 
 
     def parseData(self, data):
@@ -16,13 +22,12 @@ class TelegramBot:
         self.incoming_message_text = response['text'].lower()
         self.first_name = response['from']['first_name']
 
-    def sendMessage(self):
-        res = requests.get(TELEGRAM_SEND_MESSAGE_URL.format(self.chat_id, self.outgoing_message_text))
-          
+    def __sendMessage(self):
+        res = requests.get(TELEGRAM_SEND_MESSAGE_URL.format(self.chat_id, self.outgoing_message_text)) 
         return res.status_code == 200
 
     def conditionalResponse(self):
-        pass
+        return self.service.calendarList().list().execute()
 
 
     @staticmethod
@@ -30,3 +35,7 @@ class TelegramBot:
         init = requests.get(url)
 
         return init.status_code == 200
+
+
+p = TelegramBot()
+print(p.conditionalResponse())
