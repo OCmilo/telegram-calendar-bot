@@ -27,8 +27,7 @@ class TelegramBot:
         return res.status_code == 200
 
     def conditionalResponse(self):
-        return self.service.calendarList().list().execute()
-
+        pass
 
     @staticmethod
     def init_webhook(url):
@@ -36,6 +35,3 @@ class TelegramBot:
 
         return init.status_code == 200
 
-
-p = TelegramBot()
-print(p.conditionalResponse())
