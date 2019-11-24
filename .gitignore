@@ -4,4 +4,5 @@ __pycache__/
 .vscode/
 token.pickle
 credentials.json
+.venv/
 .env

@@ -12,11 +12,10 @@ if not TelegramBot.init_webhook(webhook):
     try:
         raise RuntimeError
     finally:
-        print('Webhook not initialized properly')
+        print("Webhook not initialized properly")
 
 
-
-@app.route('/webhook', methods=['POST'])
+@app.route("/webhook", methods=["POST"])
 def index():
     res = request.get_json()
     robot = TelegramBot()
@@ -26,16 +25,14 @@ def index():
 
 
 def webhookProccess(hostname):
-    shCommand = 'ssh -o ServerAliveInterval=60 -R {}:80:localhost:8888 serveo.net'.format(hostname)
+    shCommand = "ssh -o ServerAliveInterval=60 -R {}:80:localhost:8888 serveo.net".format(
+        hostname
+    )
     args = shlex.split(shCommand)
     subprocess.Popen(args)
 
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     webhookProccess(hostname)
     app.run(port=5000)
-
-
-
 
