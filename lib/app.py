@@ -35,4 +35,3 @@ def webhookProccess(hostname):
 if __name__ == "__main__":
     webhookProccess(hostname)
     app.run(port=5000)
-

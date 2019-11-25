@@ -37,4 +37,3 @@ class TelegramBot:
         init = requests.get(url)
 
         return init.status_code == 200
-

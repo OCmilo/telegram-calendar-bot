@@ -8,4 +8,3 @@ WEBHOOK_ENDPOINT = "{}/webhook".format(WEBHOOK_URL)
 TELEGRAM_INIT_WEBHOOK_URL = "{}/setWebhook?url={}".format(
     TELEGRAM_URL, WEBHOOK_ENDPOINT
 )
-
